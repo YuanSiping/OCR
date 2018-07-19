@@ -16,19 +16,19 @@ public class Request {
 		String imagePath="C:\\XX8.jpg";
 		String imageBase=encodeImgageToBase64(imagePath);
 		imageBase = imageBase.replaceAll("\r\n","");  
-        imageBase = imageBase.replaceAll("\\+","%2B");
+        	imageBase = imageBase.replaceAll("\\+","%2B");
 		String httpUrl = "http://apis.baidu.com/apistore/idlocr/ocr";
 		String httpArg = "fromdevice=pc&clientip=172.0.0.1&detecttype=LocateRecognize&languagetype=CHN_ENG&imagetype=1&image="+imageBase;
 		String jsonResult = request(httpUrl, httpArg);
-		System.out.println("·µ»ØµÄ½á¹û--------->"+jsonResult);
+		System.out.println("è¿”å›çš„ç»“æœ--------->"+jsonResult);
 	}
 
 	/**
 	 * @param urlAll
-	 *            :ÇëÇó½Ó¿Ú
+	 *            :è¯·æ±‚æ¥å£
 	 * @param httpArg
-	 *            :²ÎÊı
-	 * @return ·µ»Ø½á¹û
+	 *            :å‚æ•°
+	 * @return è¿”å›ç»“æœ
 	 */
 	public static String request(String httpUrl, String httpArg) {
 	    BufferedReader reader = null;
@@ -41,7 +41,7 @@ public class Request {
 	                .openConnection();
 	        connection.setRequestMethod("POST");
 	        connection.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
-	        // ÌîÈëapikeyµ½HTTP header
+	        // å¡«å…¥apikeyåˆ°HTTP header
 	        connection.setRequestProperty("apikey",  "1b2f91f68c42eccb9abf3229608edc46");
 	        connection.setDoOutput(true);
 	        connection.getOutputStream().write(httpArg.getBytes("UTF-8"));
@@ -62,16 +62,16 @@ public class Request {
 	}
 	
 	/** 
-	 * ½«±¾µØÍ¼Æ¬½øĞĞBase64Î»±àÂë 
+	 * å°†æœ¬åœ°å›¾ç‰‡è¿›è¡ŒBase64ä½ç¼–ç  
 	 *  
 	 * @param imgUrl 
-	 *            Í¼Æ¬µÄurlÂ·¾¶£¬Èçd:\\**.jpg 
+	 *            å›¾ç‰‡çš„urlè·¯å¾„ï¼Œå¦‚d:\\**.jpg 
 	 * @return 
 	 */  
-	public static String encodeImgageToBase64(String imagePath) {// ½«Í¼Æ¬ÎÄ¼ş×ª»¯Îª×Ö½ÚÊı×é×Ö·û´®£¬²¢¶ÔÆä½øĞĞBase64±àÂë´¦Àí  
-	    // Æä½øĞĞBase64±àÂë´¦Àí  
+	public static String encodeImgageToBase64(String imagePath) {// å°†å›¾ç‰‡æ–‡ä»¶è½¬åŒ–ä¸ºå­—èŠ‚æ•°ç»„å­—ç¬¦ä¸²ï¼Œå¹¶å¯¹å…¶è¿›è¡ŒBase64ç¼–ç å¤„ç†  
+	    // å…¶è¿›è¡ŒBase64ç¼–ç å¤„ç†  
 	    byte[] data = null;  
-	    // ¶ÁÈ¡Í¼Æ¬×Ö½ÚÊı×é  
+	    // è¯»å–å›¾ç‰‡å­—èŠ‚æ•°ç»„  
 	    try {  
 	    	File imageFile = new File(imagePath);
 	        InputStream in = new FileInputStream(imageFile);  
@@ -82,8 +82,8 @@ public class Request {
 	        e.printStackTrace();  
 	    }  
 	  
-	    // ¶Ô×Ö½ÚÊı×éBase64±àÂë  
+	    // å¯¹å­—èŠ‚æ•°ç»„Base64ç¼–ç   
 	    BASE64Encoder encoder = new BASE64Encoder();  
-	    return encoder.encode(data);// ·µ»ØBase64±àÂë¹ıµÄ×Ö½ÚÊı×é×Ö·û´®  
+	    return encoder.encode(data);// è¿”å›Base64ç¼–ç è¿‡çš„å­—èŠ‚æ•°ç»„å­—ç¬¦ä¸²  
 	} 
 }
